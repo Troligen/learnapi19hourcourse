@@ -1,7 +1,11 @@
 """Imports needed for the web server"""
+import os
 from random import randrange
 from fastapi import FastAPI, HTTPException, status, Response
 from pydantic import BaseModel
+import psycopg2
+from psycopg2.extras import RealDictCursor
+from dotenv import load_dotenv
 # from fastapi.params import Body
 
 
@@ -13,6 +17,18 @@ class Post(BaseModel):
     title: str
     content: str
     published: bool = True
+
+
+try:
+    load_dotenv()
+    secret_key = os.getenv("SECRET_KEY")
+    db_url = os.getenv("DATABASE_URL")
+    conn = psycopg2.connect(host=db_url, database="fastapi-course",
+                            user="postgres", password=secret_key, cursor_factory=RealDictCursor)
+    cursor = conn.cursor()
+    print("Database connection was succesfully established")
+except Exception as error:
+    print(error)
 
 
 my_posts = [

@@ -7,6 +7,9 @@ fastapi==0.104.0
 h11==0.14.0
 httptools==0.6.1
 idna==3.4
+psycopg==3.1.12
+psycopg-binary==3.1.12
+psycopg2-binary==2.9.9
 pydantic==2.4.2
 pydantic_core==2.10.1
 python-dotenv==1.0.0
